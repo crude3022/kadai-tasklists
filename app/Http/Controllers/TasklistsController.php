@@ -44,7 +44,12 @@ class TasklistsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'content' => 'required|max:255',
+        ]);
+
           // メッセージを作成
+       
         $tasklist = new Task;
         $tasklist->content = $request->content;
         $tasklist->save();
@@ -78,6 +83,7 @@ class TasklistsController extends Controller
      */
     public function edit($id)
     {
+     
        // idの値でメッセージを検索して取得
         $tasklist = Task::findOrFail($id);
 
@@ -96,6 +102,9 @@ class TasklistsController extends Controller
      */
     public function update(Request $request, $id)
     {
+         $request->validate([
+            'content' => 'required|max:255',
+        ]);
         // idの値でメッセージを検索して取得
         $tasklist = Task::findOrFail($id);
         // メッセージを更新
