@@ -45,12 +45,14 @@ class TasklistsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'title' => 'required|max:255',   // 追加
             'content' => 'required|max:255',
         ]);
 
           // メッセージを作成
        
         $tasklist = new Task;
+        $tasklist->title = $request->title;    // 追加
         $tasklist->content = $request->content;
         $tasklist->save();
 
@@ -103,11 +105,13 @@ class TasklistsController extends Controller
     public function update(Request $request, $id)
     {
          $request->validate([
+            'title' => 'required|max:255',   // 追加
             'content' => 'required|max:255',
         ]);
         // idの値でメッセージを検索して取得
         $tasklist = Task::findOrFail($id);
         // メッセージを更新
+        $tasklist->title = $request->title;    // 追加
         $tasklist->content = $request->content;
         $tasklist->save();
 
@@ -119,6 +123,7 @@ class TasklistsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     * 
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
