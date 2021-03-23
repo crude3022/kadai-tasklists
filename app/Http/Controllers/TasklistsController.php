@@ -75,11 +75,13 @@ class TasklistsController extends Controller
         $tasklist = Task::findOrFail($id);
 
         // メッセージ詳細ビューでそれを表示
+         if (\Auth::id() === $tasklist->user_id){
         return view('tasklists.show', [
             'tasklist' => $tasklist,
         ]);
     }
-
+        return redirect('/');
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -93,11 +95,13 @@ class TasklistsController extends Controller
         $tasklist = Task::findOrFail($id);
 
         // メッセージ編集ビューでそれを表示
+        if (\Auth::id() === $tasklist->user_id){
         return view('tasklists.edit', [
             'tasklist' => $tasklist,
         ]);
     }
-     
+         return redirect('/');
+    } 
 
     /**
      * Update the specified resource in storage.
