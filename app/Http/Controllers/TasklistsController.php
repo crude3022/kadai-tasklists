@@ -53,6 +53,7 @@ class TasklistsController extends Controller
           // メッセージを作成
        
         $tasklist = new Task;
+        $tasklist->user_id = $request->user()->id;  
         $tasklist->title = $request->title;    // 追加
         $tasklist->content = $request->content;
         $tasklist->status = $request->status;
@@ -114,11 +115,12 @@ class TasklistsController extends Controller
         // idの値でメッセージを検索して取得
         $tasklist = Task::findOrFail($id);
         // メッセージを更新
+        if (\Auth::id() === $tasklist->user_id){
         $tasklist->title = $request->title;    // 追加
         $tasklist->content = $request->content;
         $tasklist->status = $request->status;
         $tasklist->save();
-
+        }
         // トップページへリダイレクトさせる
         return redirect('/');
     }
@@ -135,8 +137,9 @@ class TasklistsController extends Controller
        // idの値でメッセージを検索して取得
         $tasklist = Task::findOrFail($id);
         // メッセージを削除
+        if (\Auth::id() === $tasklist->user_id){
         $tasklist->delete();
-
+        }
         // トップページへリダイレクトさせる
         return redirect('/');
     }
