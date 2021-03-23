@@ -47,6 +47,7 @@ class TasklistsController extends Controller
         $request->validate([
             'title' => 'required|max:255',   // 追加
             'content' => 'required|max:255',
+            'status' => 'required|max:10',
         ]);
 
           // メッセージを作成
@@ -54,6 +55,7 @@ class TasklistsController extends Controller
         $tasklist = new Task;
         $tasklist->title = $request->title;    // 追加
         $tasklist->content = $request->content;
+        $tasklist->status = $request->status;
         $tasklist->save();
 
         // トップページへリダイレクトさせる
@@ -107,12 +109,14 @@ class TasklistsController extends Controller
          $request->validate([
             'title' => 'required|max:255',   // 追加
             'content' => 'required|max:255',
+            'status' => 'required|max:10',
         ]);
         // idの値でメッセージを検索して取得
         $tasklist = Task::findOrFail($id);
         // メッセージを更新
         $tasklist->title = $request->title;    // 追加
         $tasklist->content = $request->content;
+        $tasklist->status = $request->status;
         $tasklist->save();
 
         // トップページへリダイレクトさせる

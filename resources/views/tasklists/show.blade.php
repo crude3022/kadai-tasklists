@@ -17,6 +17,10 @@
             <th>タスク内容</th>
             <td>{{ $tasklist->content }}</td>
         </tr>
+        <tr>
+            <th>ステータス</th>
+            <td>{{ $tasklist->status }}</td>
+        </tr>
     </table>
 <!-- ここにページ毎のコンテンツを書く -->
 {{-- メッセージ編集ページへのリンク --}}
