@@ -53,12 +53,13 @@ class TasklistsController extends Controller
           // メッセージを作成
        
         $tasklist = new Task;
+        if (\Auth::id() === $tasklist->user_id){
         $tasklist->user_id = $request->user()->id;  
         $tasklist->title = $request->title;    // 追加
         $tasklist->content = $request->content;
         $tasklist->status = $request->status;
         $tasklist->save();
-
+        }
         // トップページへリダイレクトさせる
         return redirect('/');
     }

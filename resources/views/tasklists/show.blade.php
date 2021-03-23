@@ -2,6 +2,7 @@
 
 @section('content')
 
+   @if (Auth::check())
    <h1>id = {{ $tasklist->id }} のタスク詳細ページ</h1>
 
     <table class="table table-bordered">
@@ -32,6 +33,14 @@
     {!! Form::model($tasklist, ['route' => ['tasklist.destroy', $tasklist->id], 'method' => 'delete']) !!}
         {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
- 
-    
+    @else
+     <div class="center jumbotron">
+        <div class="text-center">
+            <h1>タスクリスト</h1>
+            {{-- ユーザ登録ページへのリンク --}}
+            {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
+            {!! link_to_route('login', 'Login', [], ['class' => 'btn btn-lg btn-primary']) !!}   
+        </div>
+    </div>
+    @endif
 @endsection
