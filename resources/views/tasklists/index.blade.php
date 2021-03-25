@@ -1,10 +1,6 @@
-@extends('layouts.app')
-
-@section('content')
-
 <h1>タスクリスト</h1>
 
-    @if (count($tasklists) > 0)
+    @if  (count($tasklists) > 0)
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -32,8 +28,6 @@
     @else
     
     @endif
-    
-@endsection
 
 
                        

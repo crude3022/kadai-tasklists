@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Task;
 
+
 class TasklistsController extends Controller
 {
     /**
@@ -15,10 +16,23 @@ class TasklistsController extends Controller
      */
     public function index()
     {
-        $tasklists = Task::all();
+        $data = [];
         
-        return view('tasklists.index',[
-            'tasklists' => $tasklists,]);
+      if (\Auth::check()) { // 認証済みの場合
+            // 認証済みユーザを取得
+            $user = \Auth::user();
+            // ユーザの投稿の一覧を作成日時の降順で取得
+            // （後のChapterで他ユーザの投稿も取得するように変更しますが、現時点ではこのユーザの投稿のみ取得します）
+            $tasklists = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+
+            $data = [
+                'user' => $user,
+                'tasklists' => $tasklists,
+              ];
+        }
+
+        // Welcomeビューでそれらを表示
+        return view('welcome', $data);
     }
 
     /**
@@ -31,9 +45,12 @@ class TasklistsController extends Controller
         $tasklist = new Task;
 
         // メッセージ作成ビューを表示
+       if (\Auth::check()){
         return view('tasklists.create', [
             'tasklist' => $tasklist,
         ]);
+       }   
+       return redirect('/');
     }
 
     /**
