@@ -9,11 +9,7 @@
         <div class="col-6">
             {!! Form::model($tasklist, ['route' => 'tasklist.store']) !!}
 
-                <div class="form-group">
-                    {!! Form::label('title', 'タイトル:') !!}
-                    {!! Form::text('title', null, ['class' => 'form-control']) !!}
-                </div>
-
+                
                 <div class="form-group">
                     {!! Form::label('content', 'タスク内容:') !!}
                     {!! Form::text('content', null, ['class' => 'form-control']) !!}

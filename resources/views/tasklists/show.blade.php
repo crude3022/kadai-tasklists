@@ -11,10 +11,6 @@
             <td>{{ $tasklist->id }}</td>
         </tr>
         <tr>
-            <th>タイトル</th>
-            <td>{{ $tasklist->title }}</td>
-        </tr>
-        <tr>
             <th>タスク内容</th>
             <td>{{ $tasklist->content }}</td>
         </tr>

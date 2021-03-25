@@ -62,7 +62,7 @@ class TasklistsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:255',   // 追加
+           
             'content' => 'required|max:255',
             'status' => 'required|max:10',
         ]);
@@ -71,7 +71,6 @@ class TasklistsController extends Controller
        
         $tasklist = new Task;
         $tasklist->user_id = $request->user()->id;  
-        $tasklist->title = $request->title;    // 追加
         $tasklist->content = $request->content;
         $tasklist->status = $request->status;
         $tasklist->save();
@@ -130,7 +129,6 @@ class TasklistsController extends Controller
     public function update(Request $request, $id)
     {
          $request->validate([
-            'title' => 'required|max:255',   // 追加
             'content' => 'required|max:255',
             'status' => 'required|max:10',
         ]);
@@ -138,7 +136,6 @@ class TasklistsController extends Controller
         $tasklist = Task::findOrFail($id);
         // メッセージを更新
         if (\Auth::id() === $tasklist->user_id){
-        $tasklist->title = $request->title;    // 追加
         $tasklist->content = $request->content;
         $tasklist->status = $request->status;
         $tasklist->save();
