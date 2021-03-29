@@ -16,25 +16,31 @@ class TasklistsController extends Controller
      */
     public function index()
     {
-        $data = [];
+      /**
+     *   $data = [];
+     *   
+     * if (\Auth::check()) { // 認証済みの場合
+     *        // 認証済みユーザを取得
+     *       $user = \Auth::user();
+     *       // ユーザの投稿の一覧を作成日時の降順で取得
+     *       // （後のChapterで他ユーザの投稿も取得するように変更しますが、現時点ではこのユーザの投稿のみ取得します）
+     *       $tasklists = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+     *
+     *       $data = [
+     *           'user' => $user,
+     *           'tasklists' => $tasklists,
+     *         ];
+     *   }
+     */ 
+        $tasklists = Task::orderBy('name','desc')->get();;
+
+        // メッセージ一覧ビューでそれを表示
+        return view('tasklists.index', [
+            'tasklists' => $tasklists,
+        ]);
         
-      if (\Auth::check()) { // 認証済みの場合
-            // 認証済みユーザを取得
-            $user = \Auth::user();
-            // ユーザの投稿の一覧を作成日時の降順で取得
-            // （後のChapterで他ユーザの投稿も取得するように変更しますが、現時点ではこのユーザの投稿のみ取得します）
-            $tasklists = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
-
-            $data = [
-                'user' => $user,
-                'tasklists' => $tasklists,
-              ];
-        }
-
-        // Welcomeビューでそれらを表示
-        return view('welcome', $data);
     }
-
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -65,6 +71,7 @@ class TasklistsController extends Controller
            
             'content' => 'required|max:255',
             'status' => 'required|max:10',
+            'name' => 'required|max:10',
         ]);
 
           // メッセージを作成
@@ -73,6 +80,7 @@ class TasklistsController extends Controller
         $tasklist->user_id = $request->user()->id;  
         $tasklist->content = $request->content;
         $tasklist->status = $request->status;
+        $tasklist->name = $request->name;
         $tasklist->save();
         
         // トップページへリダイレクトさせる
@@ -162,4 +170,6 @@ class TasklistsController extends Controller
         // トップページへリダイレクトさせる
         return redirect('/');
     }
+    
+
 }

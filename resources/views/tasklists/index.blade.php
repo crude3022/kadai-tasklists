@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('content')
+
+
 <h1>タスクリスト</h1>
 
     @if  (count($tasklists) > 0)
@@ -15,6 +20,7 @@
                     <td>{!! link_to_route('tasklist.show', $tasklist->id,['tasklist' => $tasklist->id])!!}</td>
                     <td>{{ $tasklist->content }}</td>
                     <td>{{ $tasklist->status }}</td>
+                    <td>{{ $tasklist->name }}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -27,7 +33,7 @@
     
     @endif
 
-
+@endsection
                        
      
                     
