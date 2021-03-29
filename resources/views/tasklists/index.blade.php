@@ -20,7 +20,7 @@
                     <td>{!! link_to_route('tasklist.show', $tasklist->id,['tasklist' => $tasklist->id])!!}</td>
                     <td>{{ $tasklist->content }}</td>
                     <td>{{ $tasklist->status }}</td>
-                    <td>{{ $tasklist->name }}</td>
+                    <td>{{ $tasklist->yourname }}</td>
                 </tr>
                 @endforeach
             </tbody>

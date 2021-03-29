@@ -32,7 +32,7 @@ class TasklistsController extends Controller
      *         ];
      *   }
      */ 
-        $tasklists = Task::orderBy('name','desc')->get();;
+        $tasklists = Task::orderBy('yourname','desc')->get();;
 
         // メッセージ一覧ビューでそれを表示
         return view('tasklists.index', [
@@ -71,7 +71,7 @@ class TasklistsController extends Controller
            
             'content' => 'required|max:255',
             'status' => 'required|max:10',
-            'name' => 'required|max:10',
+            'yourname' => 'required|max:10',
         ]);
 
           // メッセージを作成
@@ -80,7 +80,7 @@ class TasklistsController extends Controller
         $tasklist->user_id = $request->user()->id;  
         $tasklist->content = $request->content;
         $tasklist->status = $request->status;
-        $tasklist->name = $request->name;
+        $tasklist->yourname = $request->yourname;
         $tasklist->save();
         
         // トップページへリダイレクトさせる
