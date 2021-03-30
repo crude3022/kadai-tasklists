@@ -21,7 +21,7 @@
                 </div>
                 
                  <div class="form-group">
-                    {!! Form::label('yourname', '名前:') !!}
+                    {!! Form::label('yourname', '担当者名:') !!}
                     {!! Form::text('yourname', null, ['class' => 'form-control']) !!}
                 </div>
 
